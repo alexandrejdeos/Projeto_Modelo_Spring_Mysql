@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:c="http://java.sun.com/jstl/core">
+
+	<composite:interface>
+		<composite:attribute name="bean"  required="true" />
+		<composite:attribute name="value"  type="java.lang.String"/>
+		<composite:attribute name="styleClass" type="java.lang.String"/>
+		<composite:attribute name="styleId" type="java.lang.String" required="true"/>
+		<composite:attribute name="update" type="java.lang.String"/>
+	</composite:interface>
+	
+	<composite:implementation>
+		
+		<c:if test="#{!empty cc.attrs.styleClass}">
+			<h:commandLink action="#{cc.attrs.bean.prepareView}" id="#{cc.attrs.styleId}Menu">
+			   <i class="#{cc.attrs.styleClass}" style="margin-top: -7px; margin-left: 4px;" aria-hidden="true"></i>
+			   <f:ajax render=":content" onstart="startLoad()" oncomplete="stopLoad()"/>
+			</h:commandLink>
+		</c:if>
+		<c:if test="#{!empty cc.attrs.value}">
+			<h:commandLink value="#{cc.attrs.value}" action="#{cc.attrs.bean.prepareView}" id="#{cc.attrs.styleId}">
+   				<p:ajax update=":content" onstart="startLoad()" oncomplete="stopLoad()" />
+   			</h:commandLink>
+		</c:if>
+		
+	</composite:implementation>
+
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+	<navigation-rule>
+		<display-name>erro</display-name>
+		<from-view-id>/error</from-view-id>
+		<navigation-case>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<application>
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+		<locale-config>
+			<default-locale>pt</default-locale>
+			<supported-locale>en</supported-locale>
+		</locale-config>
+		<resource-bundle>
+			<base-name>messages_pt_BR</base-name>
+			<var>msg</var>
+		</resource-bundle>
+		<message-bundle>messages_pt_BR</message-bundle>
+		<system-event-listener>
+			<system-event-listener-class>br.com.lds.web.listener.RemoveResourcesListener</system-event-listener-class>
+			<system-event-class>javax.faces.event.PreRenderViewEvent</system-event-class>
+		</system-event-listener>
+	</application>
+	<factory>
+		<exception-handler-factory>br.com.lds.web.exception.handler.ViewExceptionHandlerFactory</exception-handler-factory>
+	</factory>
+</faces-config>

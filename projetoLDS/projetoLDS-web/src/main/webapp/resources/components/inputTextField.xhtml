@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+	<composite:interface>
+		<composite:attribute name="label" />
+		<composite:attribute name="value" />
+		<composite:attribute name="disabled" default="false"/>
+		<composite:attribute name="id"/>
+		<composite:attribute name="required" default="false"/>
+		<composite:attribute name="styleClass"/>
+	</composite:interface>
+	
+	<composite:implementation>
+		<p:outputLabel for="#{cc.attrs.id}Text">#{cc.attrs.label}</p:outputLabel>
+		<p:inputText id="#{cc.attrs.id}Text" label="#{cc.attrs.label}" value="#{cc.attrs.value}" disabled="#{cc.attrs.disabled}" required="#{cc.attrs.required}" styleClass="#{cc.attrs.styleClass}"/>
+	</composite:implementation>
+
+</html>

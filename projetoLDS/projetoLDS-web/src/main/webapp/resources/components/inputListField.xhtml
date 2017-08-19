@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:c="http://java.sun.com/jstl/core">
+
+	<composite:interface>
+		<composite:attribute name="id" />
+		<composite:attribute name="label" />
+		<composite:attribute name="value" />
+		<composite:attribute name="selectItems" />
+		<composite:attribute name="render" default="#{cc.attrs.id}"/>
+		<composite:attribute name="listener" method-signature="void listener(javax.faces.event.AjaxBehaviorEvent)" />
+		<composite:attribute name="form" default="formcontent"/>
+		<composite:attribute name="required" default="false"/>
+	</composite:interface>
+	
+	<composite:implementation>
+		
+		<h:panelGroup id="#{cc.attrs.id}Panel">
+		
+		
+			<h:selectOneMenu id="#{cc.attrs.id}List" value="#{cc.attrs.value}" converter="#{entityConverter}" var="select" style="display: inline; margin-top: 5px;" required="#{cc.attrs.required}">  
+                <f:selectItems value="#{cc.attrs.selectItems}" var="select" itemLabel="#{select.nome}"/>
+                
+                 <!-- CASO TENHA PASSADO LISTENER -->
+                <c:if test="#{cc.getValueExpression('listener') != null}">
+	                <f:ajax event="change" listener="#{cc.attrs.listener}" render="#{cc.attrs.form}:#{cc.attrs.render}:#{cc.attrs.render}Panel" execute="@form"/>
+		         </c:if>
+	             <!-- CASO NÃO TENHA PASSADO LISTENER -->
+	             <c:if test="#{cc.getValueExpression('listener') == null}">
+	             	<f:ajax event="change" render="#{cc.attrs.form}:#{cc.attrs.render}Panel" execute="@form"/>
+		         </c:if>
+            </h:selectOneMenu>
+            <pf:outputLabel class="active" for="#{cc.attrs.id}List" value="#{cc.attrs.label}" />
+	        
+  		</h:panelGroup>			
+	</composite:implementation>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+		<composite:interface>
+			<composite:attribute name="id" default="dataTableListagem" shortDescription="ID do DataTable. Usado para referencia em outras partes do código" />
+			<composite:attribute name="title" shortDescription="Título da coluna" default="Resultado"/>
+			<composite:attribute name="value" type="java.util.List" shortDescription="Lista que será exibida" />
+			<composite:attribute name="style" shortDescription="Estilo complementar" />
+			<composite:attribute name="paginacao" default="#{true}"/>
+			<composite:attribute name="linhas" default="#{12}"/>
+			<composite:attribute name="rowIndexVar"/>
+		</composite:interface>
+
+		<composite:implementation>
+			<p:dataTable var="item" 
+						 value="#{cc.attrs.value}" 
+						 id="#{cc.attrs.id}" 
+						 rowIndexVar="#{cc.attrs.rowIndexVar}"
+						 tableStyleClass="col s12 highlight bordered"
+						 style="#{cc.attrs.style}"
+						 rows="#{cc.attrs.linhas}"  
+						 paginator="#{cc.attrs.paginacao}"
+						 emptyMessage="#{msg['nenhum.resultado.encontrado']}"
+						 paginatorPosition="bottom"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                         currentPageReportTemplate="Exibindo de {startRecord} a {endRecord} de {totalRecords} registros">
+
+				<composite:insertChildren />
+
+			</p:dataTable>
+		</composite:implementation>
+</html>
