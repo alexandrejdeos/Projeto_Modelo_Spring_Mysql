@@ -8,11 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-/**
- * 
- * @author lucas.vieira
- * Classe de mapeamento da tabela ACAO.
- */
 @Entity
 @Table(name = "ACAO")
 @SequenceGenerator(name = Acao.SEQUENCE_NAME, sequenceName = Acao.SEQUENCE_NAME)

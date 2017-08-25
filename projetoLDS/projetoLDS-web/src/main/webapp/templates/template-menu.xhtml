@@ -21,18 +21,8 @@
 	
 </h:head>
 <h:body>
-	
-	<ui:include src="/templates/menu.xhtml"></ui:include>
 
 	<ui:insert name="content"></ui:insert>
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-	
-	<form id="logoutForm" action="#{request.contextPath}/logout" method="POST"> 
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>	
-	</form>
-
-
-	<ui:include src="/templates/footer.xhtml"></ui:include>
 
 	<script src="#{request.contextPath}/resources/plugins/jquery-2.1.1/js/jquery-2.1.1.min.js"></script>
 	<script src="#{request.contextPath}/resources/plugins/jquery-2.1.1/js/jquery-ui.min.js"></script>

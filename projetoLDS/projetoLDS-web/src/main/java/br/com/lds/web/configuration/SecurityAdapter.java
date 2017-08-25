@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -21,24 +22,24 @@ public class SecurityAdapter extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		http.cors();
 		http.
 			authorizeRequests()
 				.antMatchers(HttpMethod.POST, "/service/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/service/**").permitAll()
-				.antMatchers("/resources/**", "/imagens/**").permitAll() 
+				.antMatchers("/resources/**", "/imagens/**").permitAll(); 
 				
-				.anyRequest()
-					.authenticated()
-						.and()
-							.formLogin()
-								//.loginPage("/login/login.xhtml").permitAll() Preciso de verificar alguns detalhes
-						.and()
-							.httpBasic()
-						.and()
-							.logout()
-								.deleteCookies("JSESSIONID")
-									.invalidateHttpSession(true)
-										.logoutSuccessUrl("/login/login.xhtml");
+		super.configure(http);
+	    http
+	    	.formLogin()
+	    		.loginPage("/login/login.xhtml").permitAll();
+	    http
+	    	.logout()
+	    		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+	    			.clearAuthentication(true)
+	    				.logoutSuccessUrl("/")
+	    					.deleteCookies("JSESSIONID")
+	    						.invalidateHttpSession(true);
 	}
 
 }

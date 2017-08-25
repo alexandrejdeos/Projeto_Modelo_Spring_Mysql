@@ -10,11 +10,6 @@ import org.springframework.stereotype.Component;
 
 import br.com.lds.web.mbean.page.comum.BasicBean;
 
-/**
- * @author lucas.vieira
- * @date 2017-06-07
- * @description Bean com as funcionalidades da tela de Manter Usuario
-*/
 @Component
 @ViewScoped
 @ManagedBean(name = "usuarioBean")
